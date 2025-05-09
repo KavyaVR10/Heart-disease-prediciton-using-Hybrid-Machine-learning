@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heart Disease Alert</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #f8f8f8, #e0f7fa);
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 40px 20px 20px;
+            color: #c62828;
+            font-size: 36px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .grid-item {
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.04);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+
+        .grid-item h2 {
+            margin-bottom: 20px;
+            color: #00796B;
+            font-size: 26px;
+        }
+
+        .grid-item p {
+            color: #333;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .emergency-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #d32f2f;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .emergency-button:hover {
+            background-color: #b71c1c;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .grid-item h2 {
+                font-size: 22px;
+            }
+
+            .grid-item p {
+                font-size: 16px;
+            }
+
+            .emergency-button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Heart Disease Detected</h1>
+
+<div class="grid-container">
+    <div class="grid-item">
+        <h2> Heart-Healthy Diet</h2>
+        <p>
+            Include leafy greens, berries, nuts, and omega-3-rich foods like salmon. Reduce intake of red meat, salt, sugar, and processed foods. Stay hydrated and eat balanced meals daily.
+        </p>
+    </div>
+
+    <div class="grid-item">
+        <h2>Exercise</h2>
+        <p>
+            Aim for 30 minutes of moderate activity daily—like brisk walking, swimming, or yoga. Exercise improves circulation, lowers blood pressure, and boosts heart health.
+        </p>
+    </div>
+
+    <div class="grid-item">
+        <h2> Smartwatch Connection</h2>
+        <p>
+            Use your smartwatch to track heart rate, oxygen levels, and step count. Connect it to the app for real-time alerts and continuous monitoring of heart-related changes.
+        </p>
+    </div>
+
+    <div class="grid-item">
+        <h2> Emergency First Aid & Call Support</h2>
+        <p>
+            If you feel discomfort in chest, shortness of breath, or pain in arms/jaw, act quickly. Sit down, take deep breaths, chew aspirin if available, and call emergency support.
+        </p>
+        <a href="tel:112" class="emergency-button"> Call Emergency</a>
+    </div>
+</div>
+
+</body>
+</html>

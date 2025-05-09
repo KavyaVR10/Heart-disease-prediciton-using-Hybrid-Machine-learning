@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/static/bk.jpg');
+            background-size: cover;
+            background-position: fixed;
+            background-repeat: no-repeat;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #111111;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border-color: #141414;
+            outline: none;
+            box-shadow: 0 0 10px rgba(11, 12, 11, 0.3);
+        }
+
+        button {
+            background: #090909;
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: #fdfafa;
+            color:black;
+            transform: translateY(-3px);
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            input, button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Heart Disease Prediction</h2>
+    <form id="prediction-form">
+        <label>Age:</label> <input type="number" id="age" required>
+        <label>Sex (0=Female, 1=Male):</label> <input type="number" id="sex" required>
+        <label>Chest Pain (0-3):</label> <input type="number" id="cp" required>
+        <label>Resting BP:</label> <input type="number" id="trestbps" required>
+        <label>Cholesterol:</label> <input type="number" id="chol" required>
+        <label>FBS (0/1):</label> <input type="number" id="fbs" required>
+        <label>Rest ECG (0-2):</label> <input type="number" id="restecg" required>
+        <label>Max Heart Rate:</label> <input type="number" id="thalach" required>
+        <label>Exercise Induced Angina (0/1):</label> <input type="number" id="exang" required>
+        <label>Old Peak:</label> <input type="number" step="0.1" id="oldpeak" required>
+        <label>Slope (0-2):</label> <input type="number" id="slope" required>
+        <label>CA (0-3):</label> <input type="number" id="ca" required>
+        <label>Thal (1-3):</label> <input type="number" id="thal" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    const form = document.getElementById('prediction-form');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const data = {
+            age: parseInt(document.getElementById('age').value),
+            sex: parseInt(document.getElementById('sex').value),
+            cp: parseInt(document.getElementById('cp').value),
+            trestbps: parseInt(document.getElementById('trestbps').value),
+            chol: parseInt(document.getElementById('chol').value),
+            fbs: parseInt(document.getElementById('fbs').value),
+            restecg: parseInt(document.getElementById('restecg').value),
+            thalach: parseInt(document.getElementById('thalach').value),
+            exang: parseInt(document.getElementById('exang').value),
+            oldpeak: parseFloat(document.getElementById('oldpeak').value),
+            slope: parseInt(document.getElementById('slope').value),
+            ca: parseInt(document.getElementById('ca').value),
+            thal: parseInt(document.getElementById('thal').value),
+        };
+
+        try {
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            if (result.prediction === "Heart Disease") {
+                window.location.href = "/positive"; 
+            } else {
+                resultDiv.textContent = " No Heart Disease predicted.";
+            }
+
+        } catch (err) {
+            console.error(err);
+            resultDiv.textContent = "Error occurred during prediction.";
+        }
+    });
+</script>
+
+
+</body>
+</html>
